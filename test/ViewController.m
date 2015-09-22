@@ -379,7 +379,16 @@
     // 获取属性类型
     NSLog(@"%s",property_getAttributes(property));
     
+    // 获取属性指定类型的值
+    NSLog(@"%s",property_copyAttributeValue(property, "T"));
     
+    // 获取属性类型列表
+    unsigned int attributeCount;
+    objc_property_attribute_t *attributes = property_copyAttributeList(property, &attributeCount);
+    while ((*attributes).name) {
+        NSLog(@"name:%s value:%s",(*attributes).name,(*attributes).value);
+        attributes++;
+    }
 }
 
 - (void)message:(NSString *)message{
